@@ -1,12 +1,9 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 // datasource db {
-//   provider = "postgresql"
+//   provider = "mysql"
 //   url      = env("DATABASE_URL")
 // }
 
@@ -14,4 +11,66 @@ datasource db {
   provider  = "postgresql"
   url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+model Author {
+  id        String   @id @default(uuid())
+  name      String   @db.VarChar(50)
+  email     String?  @unique
+  followers Int
+  role      Role     @default(USER)
+  blogs     Blog[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Blog {
+  id          String    @id @default(uuid())
+  blogTitle   String    @db.VarChar(200)
+  description String
+  imageUrl    String
+  likes       Int
+  category    Category  @default(TECHNOLOGY)
+  author      Author    @relation(fields: [authorId], references: [id])
+  authorId    String
+  tags        Tag[]
+  comments    Comment[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Tag {
+  id        String   @id @default(uuid())
+  tagName   String   @db.VarChar(50)
+  blog      Blog     @relation(fields: [blogId], references: [id])
+  blogId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  comment   String   @db.Text
+  blog      Blog     @relation(fields: [blogId], references: [id])
+  blogId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+enum Category {
+  TECHNOLOGY
+  ANDROID
+  ARTIFICIAL_INTELLIGENCE
+  WEB
+  JOBS
+  BOOKS
+  UI_UX
+  STARTUPS
+  RELATIONSHIPS
+  DATABASES
 }
