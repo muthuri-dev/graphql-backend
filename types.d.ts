@@ -1,0 +1,4 @@
+
+type Context = {
+    prisma:PrismaClient
+}
