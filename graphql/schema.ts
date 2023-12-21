@@ -1,16 +1,17 @@
-
 export const typeDefs = `#graphql
-type Author{
+type User{
     id:ID!
     name:String
     email:String
     followers:Int
+    blogs:[Blog]
+    isAuthor:Boolean
     createdAt:String
     updatedAt:String
 }
 type Blog{
     id:ID!
-    blogTitle :String
+    title:String
     description:String
     imageUrl:String
     likes:Int
@@ -18,6 +19,6 @@ type Blog{
     updatedAt:String
 }
 type Query{
-    authors:[Author]!
+    users:[User]!
 }
-`
+`;
