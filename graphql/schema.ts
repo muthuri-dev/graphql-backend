@@ -4,7 +4,6 @@ type User{
     name:String
     email:String
     followers:Int
-    blogs:[Blog]
     isAuthor:Boolean
     createdAt:String
     updatedAt:String
