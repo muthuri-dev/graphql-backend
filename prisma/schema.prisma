@@ -8,34 +8,63 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  name      String   @db.VarChar(50)
-  email     String?  @unique
-  followers Int
+  id        String     @id @default(uuid())
+  name      String
+  email     String     @unique
   blogs     Blog[]
-  isAuthor  Boolean  @default(false)
+  followers Follower[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model Follower {
+  id        String   @id @default(uuid())
+  follower  Int
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model Blog {
-  id          String    @id @default(uuid())
-  title       String    @db.VarChar(200)
-  description String
-  imageUrl    String
-  likes       Int
-  category    Category  @default(TECHNOLOGY)
-  user        User      @relation(fields: [userId], references: [id])
-  userId      String
-  tags        Tag[]
-  comments    Comment[]
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  id        String    @id @default(uuid())
+  title     String
+  content   String    @db.Text
+  imageUrl  String
+  category  Category  @default(TECH)
+  user      User      @relation(fields: [userId], references: [id])
+  userId    String
+  likes     Like[]
+  tags      Tag[]
+  comments  Comment[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+enum Category {
+  TECH
+  ANDROID
+  AI_ML
+  WEB
+  JOBS
+  STARTUPS
+  UI_UX
+  BOOKS
+  DATABASES
+}
+
+model Like {
+  id        String   @id @default(uuid())
+  like      Int
+  blog      Blog     @relation(fields: [blogId], references: [id])
+  blogId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Tag {
   id        String   @id @default(uuid())
-  tagName   String   @db.VarChar(50)
+  tag       String
   blog      Blog     @relation(fields: [blogId], references: [id])
   blogId    String
   createdAt DateTime @default(now())
@@ -44,22 +73,9 @@ model Tag {
 
 model Comment {
   id        String   @id @default(uuid())
-  comment   String   @db.Text
+  comment   String
   blog      Blog     @relation(fields: [blogId], references: [id])
   blogId    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-}
-
-enum Category {
-  TECHNOLOGY
-  ANDROID
-  ARTIFICIAL_INTELLIGENCE
-  WEB
-  JOBS
-  BOOKS
-  UI_UX
-  STARTUPS
-  RELATIONSHIPS
-  DATABASES
 }
