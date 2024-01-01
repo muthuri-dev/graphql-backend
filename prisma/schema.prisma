@@ -20,7 +20,7 @@ model User {
 model Follower {
   id        String   @id @default(uuid())
   follower  Int
-  user      User?    @relation(fields: [userId], references: [id])
+  user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -32,7 +32,7 @@ model Blog {
   content   String    @db.Text
   imageUrl  String
   category  Category  @default(TECH)
-  user      User?     @relation(fields: [userId], references: [id])
+  user      User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String?
   likes     Like[]
   tags      Tag[]
@@ -56,7 +56,7 @@ enum Category {
 model Like {
   id        String   @id @default(uuid())
   like      Int
-  blog      Blog?    @relation(fields: [blogId], references: [id])
+  blog      Blog?    @relation(fields: [blogId], references: [id], onDelete: Cascade)
   blogId    String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -65,7 +65,7 @@ model Like {
 model Tag {
   id        String   @id @default(uuid())
   tag       String
-  blog      Blog?    @relation(fields: [blogId], references: [id])
+  blog      Blog?    @relation(fields: [blogId], references: [id], onDelete: Cascade)
   blogId    String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -74,7 +74,7 @@ model Tag {
 model Comment {
   id        String   @id @default(uuid())
   comment   String
-  blog      Blog?    @relation(fields: [blogId], references: [id])
+  blog      Blog?    @relation(fields: [blogId], references: [id], onDelete: Cascade)
   blogId    String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
