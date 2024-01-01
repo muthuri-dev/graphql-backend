@@ -71,6 +71,11 @@ type Query{
     user(id:ID!):User
 }
 type Mutation{
-    addUser(name:String,email:String):User
+    createUser(name:String,email:String):User
+    createBlog(title:String,content:String,imageUrl:String,category:Category,userId:String):Blog
+    addLike(like:Int,blogId:String):Like
+    createComment(comment:String,blogId:String):Comment
+    createTag(tag:String,blogId:String):Tag
+    addFollower(follower:Int,userId:String):Follower
 }
 `;
