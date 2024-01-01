@@ -73,4 +73,14 @@ export const resolvers = {
       });
     },
   },
+  Mutation: {
+    addUser: async (parent: any, args: any, context: Context) => {
+      return await context.prisma.user.create({
+        data: {
+          name: args.name,
+          email: args.email,
+        },
+      });
+    },
+  },
 };
