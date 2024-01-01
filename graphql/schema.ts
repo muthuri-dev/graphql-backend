@@ -16,7 +16,7 @@ type Follower{
     updatedAt:String
 }
 type Blog{
-   id:ID!
+    id:ID!
     title:String
     content:String
     imageUrl:String
@@ -77,5 +77,12 @@ type Mutation{
     createComment(comment:String,blogId:String):Comment
     createTag(tag:String,blogId:String):Tag
     addFollower(follower:Int,userId:String):Follower
+    updateBlog(id:ID!,title:String,content:String,imageUrl:String,category:Category):Blog
+    updateComment(id:ID!,comment:String):Comment
+    deleteBlog(id:ID!):Blog
+    deleteLike(id:ID!):Like
+    deleteComment(id:ID!):Comment
+    deleteTag(id:ID!):Tag
+    deleteFollower(id:ID!):Follower
 }
 `;

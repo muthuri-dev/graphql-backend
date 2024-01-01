@@ -118,10 +118,68 @@ export const resolvers = {
       });
     },
     addFollower: async (_parent: string, args: any, context: Context) => {
-      return context.prisma.follower.create({
+      return await context.prisma.follower.create({
         data: {
           follower: args.follower,
           userId: args.userId,
+        },
+      });
+    },
+    updateBlog: async (_parent: string, args: any, context: Context) => {
+      return await context.prisma.blog.update({
+        where: {
+          id: args.id,
+        },
+        data: {
+          title: args.title,
+          content: args.content,
+          imageUrl: args.imageUrl,
+          category: args.category,
+        },
+      });
+    },
+    updateComment: async (_parent: any, args: any, context: Context) => {
+      return await context.prisma.comment.update({
+        where: {
+          id: args.id,
+        },
+        data: {
+          comment: args.comment,
+        },
+      });
+    },
+    deleteBlog: async (_parent: string, args: any, context: Context) => {
+      return await context.prisma.blog.delete({
+        where: {
+          id: args.id,
+        },
+      });
+    },
+    deleteComment: async (_parent: string, args: any, context: Context) => {
+      return await context.prisma.comment.delete({
+        where: {
+          id: args.id,
+        },
+      });
+    },
+    deleteLike: async (_parent: string, args: any, context: Context) => {
+      return await context.prisma.like.delete({
+        where: {
+          id: args.id,
+        },
+      });
+    },
+    deleteTag: async (_parent: string, args: any, context: Context) => {
+      return await context.prisma.tag.delete({
+        where: {
+          id: args.id,
+        },
+      });
+    },
+    deleteFollower: async (_parent: string, args: any, context: Context) => {
+      return await context.prisma.follower.delete({
+        where: {
+          id: args.id,
         },
       });
     },
