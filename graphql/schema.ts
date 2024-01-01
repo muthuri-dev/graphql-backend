@@ -3,6 +3,7 @@ type User{
     id:ID!
     name:String
     email:String
+    blogs:[Blog]
     followers:[Follower]
     createdAt:String
     updatedAt:String
@@ -21,7 +22,7 @@ type Blog{
     imageUrl:String
     category:Category
     userId:String
-    likes:[like]
+    likes:[Like]
     tags:[Tag]
     comments:[Comment]
     createdAt:String
@@ -59,4 +60,16 @@ enum Category {
   BOOKS
   DATABASES
 }
+
+type Query{
+    users:[User]
+    blogs:[Blog]
+    tags:[Tag]
+    comments:[Comment]
+    followers:[Follower]
+    likes:[Like]
+    blog(id:ID!):Blog
+    user(id:ID!):User
+}
+
 `;
