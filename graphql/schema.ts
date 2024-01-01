@@ -16,7 +16,7 @@ type Follower{
     updatedAt:String
 }
 type Blog{
-    id:ID!
+   id:ID!
     title:String
     content:String
     imageUrl:String
@@ -60,7 +60,6 @@ enum Category {
   BOOKS
   DATABASES
 }
-
 type Query{
     users:[User]
     blogs:[Blog]
@@ -71,5 +70,7 @@ type Query{
     blog(id:ID!):Blog
     user(id:ID!):User
 }
-
+type Mutation{
+    addUser(name:String,email:String):User
+}
 `;
