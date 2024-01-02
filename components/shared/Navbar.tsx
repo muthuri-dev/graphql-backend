@@ -4,7 +4,7 @@ import { TfiWrite } from "react-icons/tfi";
 
 export default function Navbar() {
   return (
-    <div className="navbar bg-slate-950 rounded-2xl mb-10 flex justify-between sticky">
+    <div className="navbar bg-slate-950 rounded-2xl mb-10 flex justify-between sticky top-4">
       <div className="flex">
         <a className="btn btn-ghost text-xl">Bloggz</a>
       </div>

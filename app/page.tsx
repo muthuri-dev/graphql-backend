@@ -1,10 +1,7 @@
-import Navbar from "@/components/shared/Navbar";
-import Image from "next/image";
 import React from "react";
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center sm:p-6 md:p-24">
-      <Navbar />
       <div className="mockup-browser border border-base-300 w-full h-fit">
         <div className="mockup-browser-toolbar">
           <div className="input border border-base-300">Hello developers</div>
