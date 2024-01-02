@@ -4,7 +4,7 @@ export default function Navbar() {
   return (
     <div className="navbar bg-slate-950 rounded-2xl mb-10">
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl">DEV</a>
+        <a className="btn btn-ghost text-xl">Bloggz</a>
       </div>
       <div className="flex-none">
         <button className="btn btn-ghost btn-circle">
