@@ -11,6 +11,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Bloggz",
   description: "Developer blogging application",
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({
@@ -24,10 +25,9 @@ export default function RootLayout({
         <body className={inter.className}>
           <SignedIn>
             <Navbar />
-            {children}
+            <Providers>{children}</Providers>
           </SignedIn>
           <SignedOut>
-            <Providers>{children}</Providers>
             <SignIn />
           </SignedOut>
         </body>
