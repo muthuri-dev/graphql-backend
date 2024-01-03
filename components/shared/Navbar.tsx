@@ -13,7 +13,7 @@ const Navbar = React.memo(() => {
   const toggleMenu = () => setToggle(!toggle);
 
   return (
-    <div className="flex justify-between md:pl-16 md:pr-16 pt-3 pb-3 items-center z-30 shadow-md rounded-2xl sticky top-0 bg-opacity-70 ">
+    <div className="flex justify-between md:pl-16 md:pr-16 pt-3 pb-3 items-center z-30 shadow-md rounded-2xl sticky top-0 bg-opacity-80 bg-white ">
       <div>
         <Image
           src="/whiteLogo-removebg.png"
