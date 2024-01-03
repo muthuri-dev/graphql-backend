@@ -1,8 +1,8 @@
-import { Blog, PrismaClient } from "@prisma/client";
+import { Blog, PrismaClient, User } from "@prisma/client";
 type Context = {
   prisma: PrismaClient;
 };
 
-interface ITrend extends Blog {
-  TrendBlog: Blog[];
+interface ITrend extends User {
+  blogs: Blog[];
 }

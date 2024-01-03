@@ -7,6 +7,7 @@ export const GET_TREDING_BLOGS = gql`
       name
       blogs {
         title
+        imageUrl
         updatedAt
       }
     }
