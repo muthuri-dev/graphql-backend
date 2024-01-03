@@ -1,11 +1,14 @@
 import React from "react";
 
-interface IUserButton {
-  children: String;
+interface IButton {
+  children: String | React.ReactNode;
   type: "outline" | "solid";
-  method: () => void;
+  method: () =>
+    | void
+    | React.MouseEventHandler<HTMLButtonElement>
+    | React.ReactNode;
 }
-export default function Button({ children, method, type }: IUserButton) {
+export default function Button({ children, method, type }: IButton) {
   return (
     <div>
       <button
