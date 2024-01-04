@@ -1,5 +1,4 @@
 import { ITrend } from "@/types";
-import Image from "next/image";
 import React from "react";
 import { CiLock } from "react-icons/ci";
 import { IoPersonCircle } from "react-icons/io5";

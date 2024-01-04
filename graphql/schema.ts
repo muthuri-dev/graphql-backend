@@ -64,7 +64,7 @@ type Query{
     users:[User]
     blogs:[Blog]
     tags:[Tag]
-    comments:[Comment]
+    comments(blogId:ID!):[Comment]
     followers:[Follower]
     likes:[Like]
     blog(id:ID!):Blog

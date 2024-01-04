@@ -4,9 +4,13 @@ import React from "react";
 import { useQuery } from "@apollo/client";
 import { GET_BLOG } from "@/graphql/queries";
 import LoadingSkeleton from "@/components/shared/LoadingSkeleton";
+import User from "@/components/home/User";
+import Comments from "@/components/home/Comments";
 
 export default function SINGLEBLOG({ params: { id } }: TParams) {
   const { data, loading, error } = useQuery(GET_BLOG, { variables: { id } });
+  const blogId: string = data?.blog.comments.blogId;
+  console.log(blogId);
   if (loading)
     return (
       <div>
@@ -35,7 +39,7 @@ export default function SINGLEBLOG({ params: { id } }: TParams) {
                 href="#"
                 className="text-indigo-600 font-medium hover:text-gray-900 transition duration-500 ease-in-out"
               >
-                Ahmad Sultani
+                <User userId={data?.blog.userId} />
               </a>
             </p>
             <blockquote className="border-l-4 text-base font-thin leading-8 my-5 p-5">
@@ -44,7 +48,9 @@ export default function SINGLEBLOG({ params: { id } }: TParams) {
           </div>
         </div>
       </div>
-      <div>comments</div>
+      <div>
+        <Comments blogId={data?.blog.comments.blogId} />
+      </div>
     </div>
   );
 }
