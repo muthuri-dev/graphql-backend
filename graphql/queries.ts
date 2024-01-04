@@ -42,10 +42,33 @@ export const GET_BLOGS = gql`
     }
   }
 `;
-export const GET_USERS = gql`
+export const GET_USER = gql`
   query Query($id: ID!) {
     user(id: $id) {
       name
+    }
+  }
+`;
+export const GET_BLOG = gql`
+  query Blog($id: ID!) {
+    blog(id: $id) {
+      id
+      title
+      content
+      imageUrl
+      userId
+      updatedAt
+      likes {
+        id
+        blogId
+        like
+      }
+      comments {
+        id
+        comment
+        blogId
+        updatedAt
+      }
     }
   }
 `;

@@ -20,12 +20,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-      <html lang="en">
-        <body className={inter.className}>
-            <Navbar />
-            <Providers>{children}</Providers>
-            <Footer />
-        </body>
-      </html>
+    <html lang="en">
+      <body className={inter.className}>
+        <Navbar />
+        <Providers>{children}</Providers>
+        {/* <Footer /> */}
+      </body>
+    </html>
   );
 }

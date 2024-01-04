@@ -12,8 +12,8 @@ export default function Home() {
   const blogs: IBlogs = data?.blogs;
   console.log(blogs);
   return (
-    <div className="grid grid-cols-6 h-screen">
-      <div className="col-span-4">
+    <div className="grid grid-cols-6">
+      <div className="col-span-6 md:col-span-4">
         <div>
           <ul className="flex flex-wrap border-b">
             {CategoryNav.map((item) => (
@@ -45,7 +45,7 @@ export default function Home() {
           )}
         </div>
       </div>
-      <div className="col-span-2 border border-l border-gray-200 font-thin">
+      <div className="col-span-2 border border-l border-gray-200 font-thin hidden md:flex ">
         Trending and adverts
       </div>
     </div>
