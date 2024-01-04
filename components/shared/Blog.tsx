@@ -2,6 +2,7 @@ import React from "react";
 import { IoPersonCircle } from "react-icons/io5";
 import Image from "next/image";
 import { IBlogs } from "@/types";
+import { AiOutlineLike } from "react-icons/ai";
 
 export default function Blog({ blog }: { blog: IBlogs }) {
   return (
@@ -27,40 +28,37 @@ export default function Blog({ blog }: { blog: IBlogs }) {
             // onClick={() => router.push(`/blog/${id}`)}
           >
             <h1 className="font-heading text-base sm:text-xl font-semibold sm:font-bold  text-slate-700 dark:text-slate-200 cursor-pointer">
-              Python for Data Science and Machine Learning
+              {blog.title}
             </h1>
             <p className="text-base font-normal text-slate-500 dark:text-slate-400 cursor-pointer line-clamp-3 hidden md:block">
-              Blog Subtitle - Lorem ipsum dolor sit amet, consectetur
-              adipisicing elit. Ut inventore pariatur suscipit voluptatem quod
-              cum blanditiis veniam, quidem,
+              {blog.content.slice(0, 130)}...
             </p>
           </div>
           <div className=" h-32 md:w-[1000px] rounded-md">
             <Image
-              src="https://images.unsplash.com/photo-1622837137190-4f8b9e2b9b0f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8ZGF0YSUyMHNjaWVuY2V8ZW58MHx8MHx8&ixlib=rb-1.2.1"
+              src={blog.imageUrl}
               alt="blogimage"
               width={100}
               height={500}
-              className=" w-full h-full rounded-md bg-slate-800"
+              className=" w-full h-full rounded-md object-contain"
               loading="lazy"
             />
           </div>
         </div>
         <div className="flex justify-between mt-4 text-slate-700 dark:text-slate-200 w-full">
           <span className="flex gap-1 items-center">
-            <p className=" font-medium"> Likes</p>
+            <p className=" font-mono flex text-black">
+              <AiOutlineLike />
+              {blog.likes.length}
+            </p>
           </span>
           <span className="flex gap-1 items-center">
             <span className=" flex flex-wrap gap-1 justify-end">
-              <p className="rounded-full px-2 py-1 cursor-pointer text-xs font-medium text-slate-700 dark:text-slate-300 bg-slate-300 hover:bg-slate-400 dark:bg-slate-900 dark:hover:bg-slate-700 w-min max-w-[126px] truncate text-left">
-                Python
-              </p>
-              <p className="rounded-full px-2 py-1 cursor-pointer text-xs font-medium text-slate-700 dark:text-slate-300 bg-slate-300 hover:bg-slate-400 dark:bg-slate-900 dark:hover:bg-slate-700 w-min max-w-[120px] truncate text-left">
-                Data Science
-              </p>
-              <p className="rounded-full px-2 py-1 cursor-pointer text-xs font-medium text-slate-700 dark:text-slate-300 bg-slate-300 hover:bg-slate-400 dark:bg-slate-900 dark:hover:bg-slate-700 w-min max-w-[120px] truncate text-left">
-                Machine Learning
-              </p>
+              {blog.tags.map((tag) => (
+                <p className="rounded-full px-2 py-1 cursor-pointer text-xs font-medium text-slate-700 dark:text-slate-300 bg-slate-300 hover:bg-slate-400 dark:bg-slate-900 dark:hover:bg-slate-700 w-min max-w-[126px] truncate text-left">
+                  {tag.tag}
+                </p>
+              ))}
             </span>
           </span>
         </div>
