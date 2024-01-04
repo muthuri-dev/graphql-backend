@@ -14,7 +14,6 @@
     "@apollo/client": "^3.8.8",
     "@apollo/server": "^4.9.5",
     "@as-integrations/next": "^3.0.0",
-    "@clerk/nextjs": "^4.29.1",
     "@ducanh2912/next-pwa": "^10.0.2",
     "@prisma/client": "^5.7.1",
     "@types/jest": "^29.5.11",

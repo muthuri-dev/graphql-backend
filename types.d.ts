@@ -6,3 +6,9 @@ type Context = {
 interface ITrend extends User {
   blogs: Blog[];
 }
+
+type TParams = {
+  params: {
+    id: string;
+  };
+};
