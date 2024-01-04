@@ -1,4 +1,4 @@
-import { Blog, PrismaClient, User } from "@prisma/client";
+import { Blog, Comment, Like, PrismaClient, Tag, User } from "@prisma/client";
 type Context = {
   prisma: PrismaClient;
 };
@@ -12,3 +12,8 @@ type TParams = {
     id: string;
   };
 };
+interface IBlogs extends Blog {
+  likes: Like[];
+  comments: Comment[];
+  tags: Tag[];
+}

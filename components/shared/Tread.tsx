@@ -10,16 +10,16 @@ type TTread = {
 
 export default function Tread({ treading }: TTread) {
   return (
-    <div className="relative flex w-full min-w-fit flex-col rounded-xl bg-transparent bg-clip-border text-gray-700 shadow-md border border-gray-200 border-r p-3">
+    <div className="relative flex w-full min-w-fit flex-col rounded-xl bg-transparent bg-clip-border text-gray-700 shadow-md border border-gray-100 border-r p-3">
       <div className="relative flex items-center gap-4 pt-0 pb-2 mx-0 mt-2 overflow-hidden text-gray-700 bg-transparent shadow-none rounded-xl bg-clip-border">
         <IoPersonCircle className="relative inline-block h-[58px] w-[58px] !rounded-full  object-cover object-center" />
 
         <div className="flex w-full flex-col gap-0.5">
           <div className="flex items-center justify-between">
-            <h5 className="block font-sans text-lg antialiased font-medium leading-snug tracking-normal text-blue-gray-900">
+            <h5 className="block font-mono text-lg antialiased font-medium leading-snug tracking-normal text-blue-gray-900">
               {treading.name}
             </h5>
-            <div className="flex items-center gap-0 5">
+            <div className="flex items-center gap-0 5 font-extralight">
               <CiLock />
               members only
             </div>
@@ -27,9 +27,9 @@ export default function Tread({ treading }: TTread) {
         </div>
       </div>
       <div className="p-0 mb-6">
-        <p className="block font-sans text-base antialiased font-light leading-relaxed text-inherit">
+        <p className="block font-sans text-base antialiased font-thin leading-relaxed text-inherit">
           {treading.blogs.map((blog) => (
-            <div>{blog.title}</div>
+            <div>{blog.content.slice(0, 50)}...</div>
           ))}
         </p>
       </div>

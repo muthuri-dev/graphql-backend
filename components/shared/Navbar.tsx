@@ -30,8 +30,8 @@ const Navbar = React.memo(() => {
               onClick={() => setActive(nav.id)}
               className={
                 nav.id === active
-                  ? "bg-blue-600 py-2 px-4 rounded-2xl hover:text-white"
-                  : "underline italic hover:no-underline"
+                  ? "bg-blue-600 py-2 px-4 font-thin rounded-2xl hover:text-white"
+                  : "underline font-mono hover:no-underline"
               }
             >
               {nav.value}
