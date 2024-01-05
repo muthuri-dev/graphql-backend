@@ -10,7 +10,6 @@ import { IBlogs } from "@/types";
 export default function Home() {
   const { data, loading, error } = useQuery(GET_BLOGS);
   const blogs: IBlogs = data?.blogs;
-  console.log(blogs);
   return (
     <div className="grid grid-cols-6">
       <div className="col-span-6 md:col-span-4">
@@ -33,7 +32,9 @@ export default function Home() {
         </div>
         <div>
           {loading ? (
-            <p>Loading...</p>
+            <div className="h-screen ">
+              <p>Loading...</p>
+            </div>
           ) : error ? (
             <p>Error</p>
           ) : (

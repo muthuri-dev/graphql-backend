@@ -8,9 +8,8 @@ import UserComponent from "./UserComponent";
 type TUser = User;
 
 export default function Comments({ blogId }: { blogId: string }) {
-  const { data: Comment } = useQuery(GET_COMMENTS, { variables: { blogId } });
-  const comments: Comment[] = Comment?.comments;
-  console.log("comments: " + comments);
+  const { data: Comment } = useQuery(GET_COMMENTS);
+  const comments: Comment[] = Comment?.allComments;
   return (
     <div>
       <div className="w-full bg-white rounded-lg border p-2 my-4 mx-6">
@@ -31,7 +30,9 @@ export default function Comments({ blogId }: { blogId: string }) {
                           className="object-cover w-8 h-8 rounded-full 
                         border-2 border-emerald-400  shadow-emerald-400"
                         />
-                        <h3 className="font-bold">kennedy muthuri</h3>
+                        <h3 className="font-bold">
+                          <UserComponent userId={comment.userId!} />
+                        </h3>
                       </div>
                       <p className="text-gray-600 mt-2">{comment.comment}</p>
                     </div>

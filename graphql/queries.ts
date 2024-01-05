@@ -73,9 +73,9 @@ export const GET_BLOG = gql`
   }
 `;
 export const GET_COMMENTS = gql`
-  query Comments($blogId: ID!) {
-    comments(blogId: $blogId) {
-      id
+  query Query {
+    allComments {
+      userId
       comment
       blogId
       updatedAt
