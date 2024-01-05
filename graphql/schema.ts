@@ -49,6 +49,7 @@ type Comment{
     blogId:String
     userId:String
     user:User
+    blog:Blog
     createdAt:String
     updatedAt:String
 }

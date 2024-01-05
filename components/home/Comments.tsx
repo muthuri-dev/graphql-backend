@@ -10,7 +10,7 @@ type TUser = User;
 export default function Comments({ blogId }: { blogId: string }) {
   const { data: Comment } = useQuery(GET_COMMENTS, { variables: { blogId } });
   const comments: Comment[] = Comment?.comments;
-
+  console.log(comments);
   return (
     <div>
       <div className="w-full bg-white rounded-lg border p-2 my-4 mx-6">
