@@ -77,7 +77,15 @@ export const GET_COMMENTS = gql`
     comments(blogId: $blogId) {
       id
       comment
+      blogId
       updatedAt
+    }
+  }
+`;
+export const GET_USERID = gql`
+  query Blog($id: ID!) {
+    blog(id: $id) {
+      userId
     }
   }
 `;

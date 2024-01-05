@@ -4,7 +4,7 @@ import React from "react";
 import { useQuery } from "@apollo/client";
 import { GET_BLOG } from "@/graphql/queries";
 import LoadingSkeleton from "@/components/shared/LoadingSkeleton";
-import User from "@/components/home/User";
+import User from "@/components/home/UserComponent";
 import Comments from "@/components/home/Comments";
 
 export default function SINGLEBLOG({ params: { id } }: TParams) {
@@ -49,7 +49,7 @@ export default function SINGLEBLOG({ params: { id } }: TParams) {
         </div>
       </div>
       <div>
-        <Comments blogId={data?.blog.comments.blogId} />
+        <Comments blogId={id} />
       </div>
     </div>
   );

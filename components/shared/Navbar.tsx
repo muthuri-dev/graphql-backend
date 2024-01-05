@@ -37,7 +37,6 @@ const Navbar = React.memo(() => {
               {nav.value}
             </Link>
           ))}
-          <MdModeNight className="text-3xl" />
         </div>
         <div className="flex md:hidden">
           <Button

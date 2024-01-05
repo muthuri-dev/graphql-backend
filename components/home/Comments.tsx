@@ -1,12 +1,18 @@
 import React from "react";
 import { IoPersonCircle } from "react-icons/io5";
 import { useQuery } from "@apollo/client";
-import { GET_COMMENTS } from "@/graphql/queries";
+import { GET_COMMENTS, GET_USERID } from "@/graphql/queries";
+import { Comment, User } from "@prisma/client";
+import UserComponent from "./UserComponent";
+
+type TUser = User;
 
 export default function Comments({ blogId }: { blogId: string }) {
-  const { data } = useQuery(GET_COMMENTS, { variables: { blogId } });
-  // console.log(data?.comments);
-  console.log(blogId);
+  const { data: Comment } = useQuery(GET_COMMENTS, { variables: { blogId } });
+  const { data: UserId } = useQuery(GET_USERID, { variables: { id: blogId } });
+  const comments: Comment[] = Comment?.comments;
+
+  console.log(UserId?.blog);
   return (
     <div>
       <div className="w-full bg-white rounded-lg border p-2 my-4 mx-6">
@@ -14,28 +20,30 @@ export default function Comments({ blogId }: { blogId: string }) {
 
         <form>
           <div className="flex flex-col">
-            <div className="border rounded-md p-3 ml-3 my-3">
-              <div className="flex gap-3 items-center">
-                <IoPersonCircle
-                  className="object-cover w-8 h-8 rounded-full 
-                            border-2 border-emerald-400  shadow-emerald-400
-                            "
-                />
-                <h3 className="font-bold">User name</h3>
-              </div>
-
-              <p className="text-gray-600 mt-2">this is sample commnent</p>
-            </div>
-            <div className="border rounded-md p-3 ml-3 my-3">
-              <div className="flex gap-3 items-center">
-                <IoPersonCircle
-                  className="object-cover w-8 h-8 rounded-full 
-                            border-2 border-emerald-400  shadow-emerald-400"
-                />
-                <h3 className="font-bold">User name</h3>
-              </div>
-              <p className="text-gray-600 mt-2">this is sample commnent</p>
-            </div>
+            {comments &&
+              comments.map((comment) => {
+                if (comment.blogId === blogId) {
+                  return (
+                    <div
+                      className="border rounded-md p-3 ml-3 my-3"
+                      key={comment.id}
+                    >
+                      <div className="flex gap-3 items-center">
+                        <IoPersonCircle
+                          className="object-cover w-8 h-8 rounded-full 
+                        border-2 border-emerald-400  shadow-emerald-400"
+                        />
+                        <h3 className="font-bold">
+                          <UserComponent userId={UserId?.blog.userId} />
+                        </h3>
+                      </div>
+                      <p className="text-gray-600 mt-2">{comment.comment}</p>
+                    </div>
+                  );
+                } else {
+                  return <div key={comment.id}></div>;
+                }
+              })}
           </div>
           <div className="w-full px-3 my-2">
             <textarea
