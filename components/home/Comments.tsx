@@ -1,7 +1,7 @@
 import React from "react";
 import { IoPersonCircle } from "react-icons/io5";
 import { useQuery } from "@apollo/client";
-import { GET_COMMENTS, GET_USERID } from "@/graphql/queries";
+import { GET_COMMENTS } from "@/graphql/queries";
 import { Comment, User } from "@prisma/client";
 import UserComponent from "./UserComponent";
 
@@ -9,10 +9,8 @@ type TUser = User;
 
 export default function Comments({ blogId }: { blogId: string }) {
   const { data: Comment } = useQuery(GET_COMMENTS, { variables: { blogId } });
-  const { data: UserId } = useQuery(GET_USERID, { variables: { id: blogId } });
   const comments: Comment[] = Comment?.comments;
 
-  console.log(UserId?.blog);
   return (
     <div>
       <div className="w-full bg-white rounded-lg border p-2 my-4 mx-6">
@@ -33,9 +31,7 @@ export default function Comments({ blogId }: { blogId: string }) {
                           className="object-cover w-8 h-8 rounded-full 
                         border-2 border-emerald-400  shadow-emerald-400"
                         />
-                        <h3 className="font-bold">
-                          <UserComponent userId={UserId?.blog.userId} />
-                        </h3>
+                        <h3 className="font-bold">kennedy</h3>
                       </div>
                       <p className="text-gray-600 mt-2">{comment.comment}</p>
                     </div>

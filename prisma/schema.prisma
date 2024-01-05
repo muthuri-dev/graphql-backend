@@ -15,6 +15,7 @@ model User {
   followers Follower[]
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
+  Comment   Comment[]
 }
 
 model Follower {
@@ -78,4 +79,6 @@ model Comment {
   blogId    String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  User      User?    @relation(fields: [userId], references: [id])
+  userId    String?
 }

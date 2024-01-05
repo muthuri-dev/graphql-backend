@@ -5,6 +5,7 @@ type User{
     email:String
     blogs:[Blog]
     followers:[Follower]
+    Comment:[Comment]
     createdAt:String
     updatedAt:String
 }
@@ -46,6 +47,8 @@ type Comment{
     id:ID!
     comment:String
     blogId:String
+    userId:String
+    user:User
     createdAt:String
     updatedAt:String
 }
@@ -69,6 +72,9 @@ type Query{
     likes:[Like]
     blog(id:ID!):Blog
     user(id:ID!):User
+    Comment(id:ID!):Comment
+    singleComments(id:ID!):Comment
+    allComments:[Comment]
 }
 type Mutation{
     createUser(name:String,email:String):User

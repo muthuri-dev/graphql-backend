@@ -10,7 +10,14 @@ export const resolvers = {
     tags: async (_parent: any, _args: any, context: Context) => {
       return await context.prisma.tag.findMany();
     },
-    comments: async (_parent: any, _args: any, context: Context) => {
+    singleComments: async (_parent: any, args: any, context: Context) => {
+      return await context.prisma.comment.findUnique({
+        where: {
+          id: args.id,
+        },
+      });
+    },
+    allComments: async (_parent: any, _args: any, context: Context) => {
       return await context.prisma.comment.findMany();
     },
     followers: async (_parent: any, _args: any, context: Context) => {
@@ -65,14 +72,56 @@ export const resolvers = {
         },
       });
     },
-    followers: async (parent: any, _args: any, content: Context) => {
-      return await content.prisma.follower.findMany({
+    followers: async (parent: any, _args: any, context: Context) => {
+      return await context.prisma.follower.findMany({
+        where: {
+          userId: parent.id,
+        },
+      });
+    },
+    Comment: async (parent: any, _args: any, context: Context) => {
+      return await context.prisma.comment.findMany({
         where: {
           userId: parent.id,
         },
       });
     },
   },
+  // Comment: {
+  //   userId: async (parent: any, _args: any, context: Context) => {
+  //     if (parent.userId) {
+  //       return await context.prisma.user.findUnique({
+  //         where: {
+  //           id: parent.userId,
+  //         },
+  //       });
+  //     } else {
+  //       console.error(parent);
+  //       return null;
+  //     }
+  //   },
+  // },
+  Comment: {
+    user: async (parent: any, _args: any, context: Context) => {
+      const commentUser = await context.prisma.user.findUnique({
+        where: {
+          id: parent.userId,
+        },
+      });
+
+      // Format Date values as strings
+      if (commentUser) {
+        commentUser.createdAt =
+          commentUser.createdAt.toISOString() as unknown as Date;
+        commentUser.updatedAt =
+          commentUser.updatedAt.toISOString() as unknown as Date;
+      }
+
+      console.log("Comment User:", commentUser);
+      return commentUser;
+    },
+  },
+
   Mutation: {
     createUser: async (_parent: any, args: any, context: Context) => {
       return await context.prisma.user.create({
