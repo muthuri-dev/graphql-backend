@@ -57,27 +57,26 @@ export const resolvers = {
       });
     },
     // comments: async (parent: any, _args: any, context: Context) => {
-    //   if (!parent.id) return "No parent.id";
-    //   return await context.prisma.comment.findMany({
-    //     where: {
-    //       blogId: parent.id,
-    //     },
-    //   });
+    //   console.log("Parent ID:", parent.id); // Log parent ID
+    //   try {
+    //     const comments = await context.prisma.comment.findMany({
+    //       where: {
+    //         blogId: parent.id,
+    //       },
+    //     });
+    //     console.log("get Comments:", comments); // Log comments
+    //     return comments;
+    //   } catch (error) {
+    //     console.error("Error fetching comments:", error);
+    //     return null;
+    //   }
     // },
     comments: async (parent: any, _args: any, context: Context) => {
-      console.log("Parent ID:", parent.id); // Log parent ID
-      try {
-        const comments = await context.prisma.comment.findMany({
-          where: {
-            blogId: parent.id,
-          },
-        });
-        console.log("Comments:", comments); // Log comments
-        return comments;
-      } catch (error) {
-        console.error("Error fetching comments:", error);
-        return null;
-      }
+      return await context.prisma.comment.findMany({
+        where: {
+          blogId: parent.id,
+        },
+      });
     },
   },
   User: {
