@@ -13,6 +13,13 @@ const Navbar = () => {
   const [active, setActive] = useState(Navigation[0].id);
   const [toggle, setToggle] = useState(false);
   const toggleMenu = () => setToggle(!toggle);
+  const [isModalOpen, setModalOpen] = React.useState(false);
+  const openModal = () => {
+    setModalOpen(!isModalOpen);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
   //authenticating user
   const [session, setSession] = useState<Session | null>(null);
@@ -30,9 +37,6 @@ const Navbar = () => {
     fetchData();
   }, []);
 
-  function openModal() {
-    return <Profile />;
-  }
   return (
     <div className="flex justify-between md:pl-16 md:pr-16 pt-3 pb-3 items-center z-30 shadow-md rounded-2xl sticky w-full top-0 bg-opacity-80 bg-white ">
       <div>
@@ -76,11 +80,14 @@ const Navbar = () => {
         </div>
         <div>
           {session ? (
-            <Button
-              children={session.user?.name}
-              type="outline"
-              method={openModal}
-            />
+            <>
+              <Button
+                children={session.user?.name}
+                type="outline"
+                method={openModal}
+              />
+              {isModalOpen && <Profile onClose={closeModal} />}
+            </>
           ) : (
             <Button
               children="Get Started"
