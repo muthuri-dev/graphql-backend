@@ -3,6 +3,7 @@ type User{
     id:ID!
     name:String
     email:String
+    image:String
     blogs:[Blog]
     followers:[Follower]
     Comment:[Comment]
@@ -78,7 +79,7 @@ type Query{
     allComments:[Comment]
 }
 type Mutation{
-    createUser(name:String,email:String):User
+    createUser(name:String,email:String,image:String):User
     createBlog(title:String,content:String,imageUrl:String,category:Category,userId:String):Blog
     addLike(like:Int,blogId:String):Like
     createComment(comment:String,blogId:String):Comment

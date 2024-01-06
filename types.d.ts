@@ -17,3 +17,8 @@ interface IBlogs extends Blog {
   comments: Comment[];
   tags: Tag[];
 }
+interface ISession {
+  name: string;
+  email: string;
+  image: string;
+}

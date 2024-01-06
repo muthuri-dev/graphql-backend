@@ -1,18 +1,8 @@
 "use client";
 import Button from "@/components/shared/Button";
-import Tread from "@/components/shared/Tread";
 import React from "react";
-import { useQuery } from "@apollo/client";
-import { GET_TREDING_BLOGS } from "@/graphql/queries";
-import { ITrend } from "@/types";
-import { MdOutlineDownloading } from "react-icons/md";
 
-export default function Login() {
-  const { data, loading, error } = useQuery(GET_TREDING_BLOGS);
-  const trending: ITrend = data?.users;
-  console.log(trending);
-  if (error) return <p>Server error</p>;
-
+export default async function Login() {
   return (
     <div>
       <section className="flex justify-center flex-col items-center mt-5 md:mt-10 p-16">
@@ -33,18 +23,6 @@ export default function Login() {
       </section>
       <div className="flex justify-center items-center flex-col">
         <h1 className="font-thin underline text-lg">Trending on Tech</h1>
-
-        {loading ? (
-          <div className="flex justify-center items-center">
-            <MdOutlineDownloading className="text-3xl" />
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-7 md:m-7 ">
-            {data?.users.map((trend: ITrend) => (
-              <Tread treading={trend} />
-            ))}
-          </div>
-        )}
       </div>
     </div>
   );
