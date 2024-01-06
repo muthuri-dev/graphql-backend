@@ -89,3 +89,10 @@ export const GET_USERID = gql`
     }
   }
 `;
+export const GET_USERS = gql`
+  query Users {
+    users {
+      email
+    }
+  }
+`;

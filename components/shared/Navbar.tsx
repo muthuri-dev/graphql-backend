@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
 import Button from "./Button";
 import Link from "next/link";
@@ -8,10 +8,11 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { Session } from "next-auth";
 import { getSession } from "@/auth";
 import Profile from "../home/Profile";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
-  const [active, setActive] = useState(Navigation[0].id);
-  const [toggle, setToggle] = useState(false);
+  const [active, setActive] = React.useState(Navigation[0].id);
+  const [toggle, setToggle] = React.useState(false);
   const toggleMenu = () => setToggle(!toggle);
   const [isModalOpen, setModalOpen] = React.useState(false);
   const openModal = () => {
@@ -22,9 +23,9 @@ const Navbar = () => {
   };
 
   //authenticating user
-  const [session, setSession] = useState<Session | null>(null);
+  const [Session, setSession] = React.useState<Session | null>(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const fetchData = async () => {
       try {
         const userSession = await getSession();
@@ -37,6 +38,22 @@ const Navbar = () => {
     fetchData();
   }, []);
 
+  //navigation router
+  const route = useRouter();
+
+  //posting user to the database
+
+  const userSignUp = () => {
+    route.push("/api/auth/signin?callbackUrl=/");
+  };
+  React.useEffect(() => {
+    const user = {
+      name: Session?.user?.name,
+      email: Session?.user?.email,
+      image: Session?.user?.image,
+    };
+    console.log({ user });
+  }, [Session]);
   return (
     <div className="flex justify-between md:pl-16 md:pr-16 pt-3 pb-3 items-center z-30 shadow-md rounded-2xl sticky w-full top-0 bg-opacity-80 bg-white ">
       <div>
@@ -79,21 +96,17 @@ const Navbar = () => {
           )}
         </div>
         <div>
-          {session ? (
+          {Session ? (
             <>
               <Button
-                children={session.user?.name}
+                children={Session.user?.name}
                 type="outline"
                 method={openModal}
               />
               {isModalOpen && <Profile onClose={closeModal} />}
             </>
           ) : (
-            <Button
-              children="Get Started"
-              type="outline"
-              method={() => console.log("not logged in")}
-            />
+            <Button children="Get Started" type="outline" method={userSignUp} />
           )}
         </div>
       </div>
