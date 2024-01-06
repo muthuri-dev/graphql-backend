@@ -9,6 +9,7 @@ import { Session } from "next-auth";
 import { getSession } from "@/auth";
 import Profile from "../home/Profile";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 const Navbar = () => {
   const [active, setActive] = React.useState(Navigation[0].id);
@@ -21,9 +22,14 @@ const Navbar = () => {
   const closeModal = () => {
     setModalOpen(false);
   };
-
+  //navigation router
+  const route = useRouter();
+  const userSignUp = () => {
+    //route.push("/api/auth/signin?callbackUrl=/");
+    signIn("github", { callbackUrl: `${window.location.origin}/` });
+  };
   //authenticating user
-  const [Session, setSession] = React.useState<Session | null>(null);
+  const [session, setSession] = React.useState<Session | null>(null);
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -38,22 +44,8 @@ const Navbar = () => {
     fetchData();
   }, []);
 
-  //navigation router
-  const route = useRouter();
-
   //posting user to the database
 
-  const userSignUp = () => {
-    route.push("/api/auth/signin?callbackUrl=/");
-  };
-  React.useEffect(() => {
-    const user = {
-      name: Session?.user?.name,
-      email: Session?.user?.email,
-      image: Session?.user?.image,
-    };
-    console.log({ user });
-  }, [Session]);
   return (
     <div className="flex justify-between md:pl-16 md:pr-16 pt-3 pb-3 items-center z-30 shadow-md rounded-2xl sticky w-full top-0 bg-opacity-80 bg-white ">
       <div>
@@ -96,10 +88,10 @@ const Navbar = () => {
           )}
         </div>
         <div>
-          {Session ? (
+          {session ? (
             <>
               <Button
-                children={Session.user?.name}
+                children={session.user?.name}
                 type="outline"
                 method={openModal}
               />

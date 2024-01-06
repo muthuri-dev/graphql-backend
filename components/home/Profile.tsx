@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from "next/navigation";
-import { signOut } from "@/auth";
+import { signOut } from "next-auth/react";
 interface ModalProps {
   onClose: () => void;
 }
@@ -8,8 +8,9 @@ interface ModalProps {
 export default function Profile({ onClose }: ModalProps) {
   const route = useRouter();
   const handleClose = () => {
-    onClose();
+    //onClose();
     route.push("/api/auth/signout?callbackUrl=/login");
+    //signOut("github", { callbackUrl: `${window.location.origin}/login` });
   };
   return (
     <div className="fixed top-0 right-0 bottom-0 left-0 flex items-center justify-end">
