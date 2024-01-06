@@ -18,7 +18,5 @@ interface IBlogs extends Blog {
   tags: Tag[];
 }
 interface ISession {
-  name: string;
-  email: string;
-  image: string;
+  user: { name: string; email: string; image: string };
 }

@@ -5,6 +5,8 @@ import Button from "./Button";
 import Link from "next/link";
 import { Navigation } from "@/data/data";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { Session } from "next-auth";
+import { getSession } from "@/auth";
 import Profile from "../home/Profile";
 
 const Navbar = () => {
@@ -12,6 +14,25 @@ const Navbar = () => {
   const [toggle, setToggle] = useState(false);
   const toggleMenu = () => setToggle(!toggle);
 
+  //authenticating user
+  const [session, setSession] = useState<Session | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userSession = await getSession();
+        setSession(userSession);
+      } catch (error) {
+        console.error("Error fetching session:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  function openModal() {
+    return <Profile />;
+  }
   return (
     <div className="flex justify-between md:pl-16 md:pr-16 pt-3 pb-3 items-center z-30 shadow-md rounded-2xl sticky w-full top-0 bg-opacity-80 bg-white ">
       <div>
@@ -54,7 +75,19 @@ const Navbar = () => {
           )}
         </div>
         <div>
-          <Profile />
+          {session ? (
+            <Button
+              children={session.user?.name}
+              type="outline"
+              method={openModal}
+            />
+          ) : (
+            <Button
+              children="Get Started"
+              type="outline"
+              method={() => console.log("not logged in")}
+            />
+          )}
         </div>
       </div>
     </div>
